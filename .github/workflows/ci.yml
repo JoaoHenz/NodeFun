@@ -49,3 +49,15 @@ jobs:
 				with:
 					name: coverage-lcov
 					path: ./coverage
+			- name: Upload build artifact
+				if: success()
+				uses: actions/upload-artifact@v4
+				with:
+					name: build-dist
+					path: |
+						dist
+						package.json
+						npm-shrinkwrap.json
+						package-lock.json
+						tsconfig.json
+						.env.example
