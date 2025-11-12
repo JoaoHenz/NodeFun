@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node dist/index.js",
+    "start:prod": "node dist/index.js",
     "dev": "nodemon --watch src --ext ts --exec ts-node --esm src/index.ts",
     "lint": "eslint --ext .ts src",
     "lint:fix": "npm run lint -- --fix",
@@ -33,6 +37,6 @@
     "supertest": "^6.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "vitest": "^1.5.0"
+    "vitest": "^4.0.10"
   }
 }
