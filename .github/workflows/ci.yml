@@ -47,6 +47,7 @@ jobs:
           name: build-dist
           path: |
             ./dist
+            ./src/data
             ./package.json
             ./package-lock.json
       - name: Run tests with coverage
