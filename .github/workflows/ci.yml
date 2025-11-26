@@ -49,9 +49,6 @@ jobs:
             ./dist
             ./package.json
             ./package-lock.json
-            ./dist
-            ./package.json
-            ./package-lock.json
       - name: Run tests with coverage
         run: npm run coverage
       - name: Upload coverage artifact
