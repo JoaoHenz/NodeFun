@@ -70,6 +70,7 @@ jobs:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           slot-name: production
           package: build
+          startup-command: 'node dist/index.js'
 
       - name: Output deployment URL
         run: echo "App deployed to https://${{ vars.AZURE_WEBAPP_NAME }}.azurewebsites.net from run number '${{ github.event.inputs.run_number != '' && github.event.inputs.run_number || 'latest' }}'"
