@@ -1,0 +1,79 @@
+.movie-browser {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.browser-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.browser-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.browser-header p {
+  font-size: 1.1rem;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.results-count {
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 3rem;
+  color: #666;
+}
+
+.error-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #999;
+  padding: 3rem;
+}
+
+@media (max-width: 768px) {
+  .movie-browser {
+    padding: 1rem;
+  }
+
+  .browser-header h1 {
+    font-size: 2rem;
+  }
+
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+}
