@@ -1,49 +1,24 @@
 {
-  "name": "nodefun",
+  "name": "nodefun-monorepo",
   "version": "0.1.0",
-  "type": "module",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "backend:build": "npm run build -w packages/backend",
+    "backend:dev": "npm run dev -w packages/backend",
+    "backend:start": "npm run start -w packages/backend",
+    "backend:mcp": "npm run mcp -w packages/backend",
+    "backend:mcp:http": "npm run mcp:http -w packages/backend",
+    "frontend:build": "npm run build -w packages/frontend",
+    "frontend:dev": "npm run dev -w packages/frontend",
+    "frontend:preview": "npm run preview -w packages/frontend"
+  },
   "engines": {
     "node": "22.x"
-  },
-  "scripts": {
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "start:prod": "node dist/index.js",
-    "start:mcp": "npm run build && MCP_TRANSPORT=http node dist/mcp-server.js",
-    "dev": "nodemon --watch src --ext ts --exec ts-node --esm src/index.ts",
-    "mcp": "npm run build && node dist/mcp-server.js",
-    "mcp:dev": "ts-node --esm src/mcp-server.ts",
-    "mcp:http": "npm run build && cross-env MCP_TRANSPORT=http node dist/mcp-server.js",
-    "lint": "eslint --ext .ts src",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "coverage": "c8 --reporter=lcov --reporter=text vitest run"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.23.0",
-    "dotenv": "^16.6.1",
-    "express": "^5.1.0",
-    "zod": "^4.1.13"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.5",
-    "@types/node": "^24.10.1",
-    "@types/supertest": "^2.0.16",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "c8": "^9.1.0",
-    "cross-env": "^10.1.0",
-    "eslint": "^8.56.0",
-    "eslint-config-prettier": "^9.1.0",
-    "nodemon": "^3.0.0",
-    "prettier": "^3.3.3",
-    "supertest": "^6.3.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.10"
   }
 }
