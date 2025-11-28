@@ -75,3 +75,71 @@ export function getMovieById(id: number): Movie | undefined {
   const movies = loadMovies();
   return movies.find(movie => movie.id === id);
 }
+
+export function searchMovies(params: {
+  query?: string;
+  genre?: string;
+  minRating?: number;
+  maxResults?: number;
+}): Movie[] {
+  let results = loadMovies();
+
+  if (params.query) {
+    const query = params.query.toLowerCase();
+    results = results.filter(movie => 
+      movie.title.toLowerCase().includes(query) ||
+      movie.summary.toLowerCase().includes(query)
+    );
+  }
+
+  if (params.genre) {
+    const genre = params.genre.toLowerCase();
+    results = results.filter(movie => 
+      movie.genre.toLowerCase().includes(genre)
+    );
+  }
+
+  if (params.minRating !== undefined) {
+    results = results.filter(movie => movie.rating >= params.minRating!);
+  }
+
+  if (params.maxResults) {
+    results = results.slice(0, params.maxResults);
+  }
+
+  return results;
+}
+
+export function listMovies(limit = 20, offset = 0): Movie[] {
+  const movies = loadMovies();
+  return movies.slice(offset, offset + limit);
+}
+
+export function getMovieStats() {
+  const movies = loadMovies();
+  
+  const genres = new Set<string>();
+  let totalBudget = 0;
+  let totalGross = 0;
+  let totalRating = 0;
+  let totalRuntime = 0;
+
+  movies.forEach(movie => {
+    if (movie.genre) {
+      movie.genre.split(',').forEach(g => genres.add(g.trim()));
+    }
+    totalBudget += movie.budget || 0;
+    totalGross += movie.gross || 0;
+    totalRating += movie.rating || 0;
+    totalRuntime += movie.runtime || 0;
+  });
+
+  return {
+    totalMovies: movies.length,
+    genres: Array.from(genres).sort(),
+    totalBudget,
+    totalGross,
+    averageRating: totalRating / movies.length,
+    averageRuntime: totalRuntime / movies.length
+  };
+}
