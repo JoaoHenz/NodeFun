@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { movieApi } from '../services/movieApi';
 import { Movie } from '../types/movie';
 import { MovieCard } from './MovieCard';
@@ -13,11 +13,7 @@ export function MovieBrowser() {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [minRating, setMinRating] = useState<number | undefined>();
 
-  useEffect(() => {
-    loadMovies();
-  }, [searchQuery, selectedGenre, minRating]);
-
-  const loadMovies = async () => {
+  const loadMovies = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -39,7 +35,11 @@ export function MovieBrowser() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchQuery, selectedGenre, minRating]);
+
+  useEffect(() => {
+    loadMovies();
+  }, [loadMovies]);
 
   return (
     <div className="movie-browser">

@@ -61,10 +61,10 @@ jobs:
             ./packages/backend/package.json
             ./package-lock.json
       - name: Run backend tests with coverage
-        run: npm run test -w packages/backend
+        run: npm run coverage -w packages/backend
       - name: Upload coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: coverage-lcov
-          path: ./coverage
+          path: ./packages/backend/coverage
