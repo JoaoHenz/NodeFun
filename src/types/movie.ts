@@ -10,4 +10,5 @@ export interface Movie {
   rating: number;
   ratingCount: number;
   summary: string;
+  [key: string]: unknown;
 }
